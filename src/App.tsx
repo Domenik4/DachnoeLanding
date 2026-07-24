@@ -3,68 +3,68 @@ import { useState, useEffect, useRef, type ReactNode } from 'react'
 // ─── Data ──────────────────────────────────────────────────────────────────
 
 const NAV_LINKS = [
-  { label: 'Menu', href: '#menu' },
-  { label: 'About', href: '#about' },
-  { label: 'Gallery', href: '#gallery' },
-  { label: 'Reviews', href: '#reviews' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Меню', href: '#menu' },
+  { label: 'О нас', href: '#about' },
+  { label: 'Галерея', href: '#gallery' },
+  { label: 'Отзывы', href: '#reviews' },
+  { label: 'Контакты', href: '#contact' },
 ]
 
 const BENEFITS = [
-  { title: 'Open 24/7', desc: "Round the clock, every day. Night, early morning — we're always here.", icon: IconClock },
-  { title: 'Near Metro', desc: '2-minute walk from Prospekt Veteranov station.', icon: IconTrain },
-  { title: 'Home Cooking', desc: 'Cooked like family — honest, filling, made with heart.', icon: IconBowl },
-  { title: 'Affordable Prices', desc: 'Lunches from 200 ₽. Shawarma from 190 ₽.', icon: IconCoin },
-  { title: 'Fresh Every Day', desc: 'Vegetables, meat, and herbs delivered fresh each morning.', icon: IconLeaf },
-  { title: 'Cozy Atmosphere', desc: 'Warm interior, soft lighting, music at the right volume.', icon: IconHome },
+  { title: 'Круглосуточно', desc: 'Днём и ночью, каждый день. Утром, вечером, среди ночи — мы всегда на месте.', icon: IconClock },
+  { title: 'Рядом с метро', desc: '2 минуты пешком от станции «Проспект Ветеранов».', icon: IconTrain },
+  { title: 'Домашняя кухня', desc: 'Готовим по-семейному — честно, сытно, с душой.', icon: IconBowl },
+  { title: 'Доступные цены', desc: 'Бизнес-ланчи от 200 ₽. Шаурма от 190 ₽.', icon: IconCoin },
+  { title: 'Свежесть каждый день', desc: 'Овощи, мясо и зелень привозят свежими каждое утро.', icon: IconLeaf },
+  { title: 'Уютная атмосфера', desc: 'Тёплый интерьер, мягкий свет, музыка на нужной громкости.', icon: IconHome },
 ]
 
 const LUNCHES = [
-  { num: 1, items: ['Soup', 'Salad', '2 breads', 'Drink'], price: 200, badge: 'Best Deal', badgeColor: '#6A8D73' },
-  { num: 2, items: ['Hot dish', 'Side dish', 'Salad', '2 breads', 'Drink'], price: 230, badge: null, badgeColor: '' },
-  { num: 3, items: ['Hot dish', 'Soup', '2 breads', 'Drink'], price: 260, badge: 'Hearty', badgeColor: '#C87A4F' },
-  { num: 4, items: ['Hot dish', 'Soup', 'Side dish', 'Salad', '2 breads', 'Drink'], price: 290, badge: 'Maximum', badgeColor: '#1A1A1A' },
+  { num: 1, items: ['Суп', 'Салат', '2 хлеба', 'Напиток'], price: 200, badge: 'Лучшее', badgeColor: '#6A8D73' },
+  { num: 2, items: ['Горячее', 'Гарнир', 'Салат', '2 хлеба', 'Напиток'], price: 230, badge: null, badgeColor: '' },
+  { num: 3, items: ['Горячее', 'Суп', '2 хлеба', 'Напиток'], price: 260, badge: 'Сытный', badgeColor: '#C87A4F' },
+  { num: 4, items: ['Горячее', 'Суп', 'Гарнир', 'Салат', '2 хлеба', 'Напиток'], price: 290, badge: 'Максимум', badgeColor: '#1A1A1A' },
 ]
 
 const SHAWARMAS = [
-  { name: 'Mini', desc: 'Light and quick', badge: null },
-  { name: 'Classic', desc: 'Our evergreen', badge: 'Hit' },
-  { name: 'Double 2×', desc: 'Double the filling', badge: null },
-  { name: 'Cheese', desc: 'Melted inside', badge: 'Cheese' },
-  { name: 'Double Cheese', desc: 'For cheese lovers', badge: null },
-  { name: 'Mexican', desc: 'Corn, jalapeño, salsa', badge: 'Spicy' },
-  { name: 'Spicy', desc: 'Not for the faint-hearted', badge: 'Hot' },
-  { name: 'Arabic', desc: 'Garlic sauce, herbs', badge: null },
+  { name: 'Мини', desc: 'Лёгкая и быстрая', badge: null },
+  { name: 'Классическая', desc: 'Наша вечная классика', badge: 'Хит' },
+  { name: 'Двойная 2×', desc: 'Вдвое больше начинки', badge: null },
+  { name: 'С сыром', desc: 'С расплавленным сыром внутри', badge: 'Сыр' },
+  { name: 'Двойной сыр', desc: 'Для любителей сыра', badge: null },
+  { name: 'Мексиканская', desc: 'Кукуруза, халапеньо, сальса', badge: 'Острая' },
+  { name: 'Острая', desc: 'Не для слабонервных', badge: '🔥' },
+  { name: 'Арабская', desc: 'Чесночный соус, зелень', badge: null },
 ]
 
 const ICE_CREAMS = [
-  { name: 'Strawberry', emoji: '🍓' },
-  { name: 'Banana', emoji: '🍌' },
-  { name: 'Chocolate', emoji: '🍫' },
-  { name: 'Vanilla', emoji: '🍦' },
-  { name: 'Cream', emoji: '☁️' },
-  { name: 'Blueberry', emoji: '🫐' },
-  { name: 'Pistachio', emoji: '🌿' },
-  { name: 'Lemon-Mint', emoji: '🍋' },
-  { name: 'Melon', emoji: '🍈' },
-  { name: 'Nut', emoji: '🥜' },
-  { name: 'Mango', emoji: '🥭' },
+  { name: 'Клубничное', emoji: '🍓' },
+  { name: 'Банановое', emoji: '🍌' },
+  { name: 'Шоколадное', emoji: '🍫' },
+  { name: 'Ванильное', emoji: '🍦' },
+  { name: 'Сливочное', emoji: '☁️' },
+  { name: 'Черничное', emoji: '🫐' },
+  { name: 'Фисташковое', emoji: '🌿' },
+  { name: 'Лимон-Мята', emoji: '🍋' },
+  { name: 'Дынное', emoji: '🍈' },
+  { name: 'Ореховое', emoji: '🥜' },
+  { name: 'Манго', emoji: '🥭' },
 ]
 
 const GALLERY = [
-  { src: 'https://images.unsplash.com/photo-1712730642507-d4ad0904e997?w=800&h=600&fit=crop&auto=format', alt: 'Warm dining hall' },
-  { src: 'https://images.unsplash.com/photo-1583354608715-177553a4035e?w=600&h=800&fit=crop&auto=format', alt: 'Table set for two' },
-  { src: 'https://images.unsplash.com/photo-1568886875985-ef8a500f8d17?w=800&h=600&fit=crop&auto=format', alt: 'Homestyle soup' },
-  { src: 'https://images.unsplash.com/photo-1544031064-9de80864ade5?w=600&h=800&fit=crop&auto=format', alt: 'Airy dining room' },
-  { src: 'https://images.unsplash.com/photo-1760888548893-bc2f7e09e972?w=800&h=600&fit=crop&auto=format', alt: 'Freshly wrapped shawarma' },
-  { src: 'https://images.unsplash.com/photo-1629385701021-fcd568a743e8?w=800&h=600&fit=crop&auto=format', alt: 'Ice cream scoops' },
+  { src: 'https://images.unsplash.com/photo-1712730642507-d4ad0904e997?w=800&h=600&fit=crop&auto=format', alt: 'Тёплый зал' },
+  { src: 'https://images.unsplash.com/photo-1583354608715-177553a4035e?w=600&h=800&fit=crop&auto=format', alt: 'Столик на двоих' },
+  { src: 'https://images.unsplash.com/photo-1568886875985-ef8a500f8d17?w=800&h=600&fit=crop&auto=format', alt: 'Домашний суп' },
+  { src: 'https://images.unsplash.com/photo-1544031064-9de80864ade5?w=600&h=800&fit=crop&auto=format', alt: 'Просторный зал' },
+  { src: 'https://images.unsplash.com/photo-1760888548893-bc2f7e09e972?w=800&h=600&fit=crop&auto=format', alt: 'Свежая шаурма' },
+  { src: 'https://images.unsplash.com/photo-1629385701021-fcd568a743e8?w=800&h=600&fit=crop&auto=format', alt: 'Шарики мороженого' },
 ]
 
 const REVIEWS = [
-  { name: 'Anna K.', initials: 'AK', rating: 5, text: "Always come back when I'm in the neighborhood. The soup and fresh bread are just like home. One of those rare places that actually delivers every time." },
-  { name: 'Dmitri V.', initials: 'DV', rating: 5, text: 'Late-night shawarma after a long shift — exactly what I needed. Open 24/7, always hot, always tasty. The Mexican shawarma is something else entirely.' },
-  { name: 'Maria S.', initials: 'MS', rating: 4, text: "Business lunch for 200 rubles — I've never found better around here. Fast, filling, genuinely cozy. I come three times a week now." },
-  { name: 'Pavel N.', initials: 'PN', rating: 5, text: 'Brought the kids for ice cream. Eleven flavors! Pistachio and mango were incredible. The kids asked to go back the very next day.' },
+  { name: 'Анна К.', initials: 'AK', rating: 5, text: 'Постоянно возвращаюсь, когда бываю в районе. Суп и свежий хлеб — как дома. Одно из тех редких мест, которые не подводят ни разу.' },
+  { name: 'Дмитрий В.', initials: 'DV', rating: 5, text: 'Шаурма глубокой ночью после смены — то, что надо. Работают круглосуточно, всегда горячее, всегда вкусно. Мексиканская шаурма — это нечто.' },
+  { name: 'Мария С.', initials: 'MS', rating: 4, text: 'Бизнес-ланч за 200 рублей — я нигде не находила лучше рядом. Быстро, сытно, по-настоящему уютно. Хожу три раза в неделю.' },
+  { name: 'Павел Н.', initials: 'PN', rating: 5, text: 'Приводил детей за мороженым. Одиннадцать вкусов! Фисташковое и манго были потрясающими. Дети просились обратно на следующий же день.' },
 ]
 
 const YANDEX_MAPS_URL = 'https://yandex.ru/maps/org/dachnoye/1684105017/'
@@ -243,7 +243,7 @@ function ThemeToggle({ dark, onToggle, navScrolled }: { dark: boolean; onToggle:
   return (
     <button
       onClick={onToggle}
-      title={dark ? 'Switch to light theme' : 'Switch to dark theme'}
+      title={dark ? 'Переключить на светлую тему' : 'Переключить на тёмную тему'}
       style={{
         background: 'none',
         border: '1.5px solid',
@@ -372,7 +372,7 @@ export default function App() {
             onMouseLeave={e => { e.currentTarget.style.background = '#C87A4F'; e.currentTarget.style.transform = 'scale(1)' }}
           >
             <IconPin size={15} color="#fff" />
-            Directions
+            Как добраться
           </button>
         </div>
 
@@ -397,7 +397,7 @@ export default function App() {
           <button onClick={() => scrollTo('#contact')}
             style={{ background: '#C87A4F', color: '#fff', border: 'none', borderRadius: 12, padding: '14px 40px', fontSize: 16, fontWeight: 500, cursor: 'pointer', marginTop: 16 }}
           >
-            Get Directions
+            Как добраться
           </button>
         </div>
       )}
@@ -409,13 +409,13 @@ export default function App() {
         <div style={{ position: 'relative', width: '100%', maxWidth: 1200, margin: '0 auto', padding: '0 32px 80px' }}>
           <div style={{ opacity: heroReady ? 1 : 0, transform: heroReady ? 'none' : 'translateY(16px)', transition: 'opacity 0.8s, transform 0.8s' }}>
             <p style={{ fontSize: 11, fontWeight: 500, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.65)', marginBottom: 16, opacity: heroReady ? 1 : 0, transition: 'opacity 0.7s 0.1s' }}>
-              Urban Bistro · St. Petersburg
+              Городской бистро · Санкт-Петербург
             </p>
             <h1 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 'clamp(42px, 7vw, 72px)', fontWeight: 700, color: '#fff', lineHeight: 1.1, marginBottom: 20, maxWidth: 700, opacity: heroReady ? 1 : 0, transform: heroReady ? 'none' : 'translateY(20px)', transition: 'opacity 0.7s 0.2s, transform 0.7s 0.2s' }}>
-              Simply<br />delicious.
+              Просто<br />вкусно.
             </h1>
             <p style={{ fontSize: 'clamp(15px, 2vw, 19px)', color: 'rgba(255,255,255,0.85)', maxWidth: 460, lineHeight: 1.65, marginBottom: 36, opacity: heroReady ? 1 : 0, transform: heroReady ? 'none' : 'translateY(14px)', transition: 'opacity 0.7s 0.35s, transform 0.7s 0.35s' }}>
-              By the metro on Prospekt Veteranov. Hot lunches from 200 ₽. Always open.
+              У метро «Проспект Ветеранов». Горячие обеды от 200 ₽. Работаем круглосуточно.
             </p>
             <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 40, opacity: heroReady ? 1 : 0, transition: 'opacity 0.7s 0.5s' }}>
               <button onClick={() => scrollTo('#menu')}
@@ -423,21 +423,21 @@ export default function App() {
                 onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.03)'; e.currentTarget.style.background = '#B06A42' }}
                 onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.background = '#C87A4F' }}
               >
-                Pick a dish
+                Выбрать блюдо
               </button>
               <button onClick={() => scrollTo('#contact')}
                 style={{ background: 'transparent', color: '#fff', border: '1.5px solid rgba(255,255,255,0.55)', borderRadius: 12, padding: '15px 30px', fontSize: 15, fontWeight: 500, cursor: 'pointer', transition: 'border-color 0.2s, background 0.2s' }}
                 onMouseEnter={e => { e.currentTarget.style.borderColor = '#fff'; e.currentTarget.style.background = 'rgba(255,255,255,0.1)' }}
                 onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.55)'; e.currentTarget.style.background = 'transparent' }}
               >
-                Directions
+                Как добраться
               </button>
             </div>
             <div style={{ display: 'flex', gap: 28, flexWrap: 'wrap', opacity: heroReady ? 1 : 0, transition: 'opacity 0.7s 0.65s' }}>
               {[
-                { icon: <IconClock size={15} color="rgba(255,255,255,0.7)" />, label: 'Open 24/7' },
-                { icon: <IconTrain size={15} color="rgba(255,255,255,0.7)" />, label: 'Prospekt Veteranov metro' },
-                { icon: <IconCoin size={15} color="rgba(255,255,255,0.7)" />, label: 'Lunches from 200 ₽' },
+                { icon: <IconClock size={15} color="rgba(255,255,255,0.7)" />, label: 'Круглосуточно' },
+                { icon: <IconTrain size={15} color="rgba(255,255,255,0.7)" />, label: 'Метро «Проспект Ветеранов»' },
+                { icon: <IconCoin size={15} color="rgba(255,255,255,0.7)" />, label: 'Обеды от 200 ₽' },
               ].map(({ icon, label }) => (
                 <div key={label} style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
                   {icon}
@@ -453,18 +453,18 @@ export default function App() {
       <section id="about" style={{ padding: '96px 32px', maxWidth: 1200, margin: '0 auto' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 64, alignItems: 'center' }}>
           <Fade>
-            <p style={{ fontSize: 11, fontWeight: 500, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#C87A4F', marginBottom: 16 }}>Our story</p>
+            <p style={{ fontSize: 11, fontWeight: 500, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#C87A4F', marginBottom: 16 }}>Наша история</p>
             <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 'clamp(30px, 4vw, 46px)', fontWeight: 700, lineHeight: 1.2, marginBottom: 22, color: 'var(--ink)' }}>
-              Cooked just<br />like home
+              Готовим как<br />дома
             </h2>
             <p style={{ fontSize: 16, lineHeight: 1.75, color: 'var(--ink-2)', marginBottom: 18 }}>
-              On Prospekt Veteranov there&apos;s a place where it&apos;s always tasty, cozy, and simple. Dachnoye is not a chain, not fast food, and not a pretentious restaurant.
+              На проспекте Ветеранов есть место, где всегда вкусно, уютно и просто. «Дачное» — не сеть, не фастфуд и не пафосный ресторан.
             </p>
             <p style={{ fontSize: 16, lineHeight: 1.75, color: 'var(--ink-2)', marginBottom: 36 }}>
-              It&apos;s a true urban bistro you&apos;ll want to come back to — where the soup is always on, the bread is always fresh, and the door is always open.
+              Это настоящий городской бистро, в который хочется возвращаться — где суп всегда горячий, хлеб свежий, а двери открыты.
             </p>
             <div style={{ display: 'flex', gap: 40 }}>
-              {[{ num: '300+', label: 'Reviews' }, { num: '4.0', label: 'Rating' }, { num: '24/7', label: 'Always open' }].map(({ num, label }) => (
+              {[{ num: '300+', label: 'Отзывов' }, { num: '4,0', label: 'Рейтинг' }, { num: '24/7', label: 'Всегда открыто' }].map(({ num, label }) => (
                 <div key={label}>
                   <div style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 30, fontWeight: 700, color: '#C87A4F' }}>{num}</div>
                   <div style={{ fontSize: 13, color: 'var(--ink-3)', marginTop: 2 }}>{label}</div>
@@ -474,7 +474,7 @@ export default function App() {
           </Fade>
           <Fade delay={150}>
             <div style={{ borderRadius: 20, overflow: 'hidden', aspectRatio: '4/3', boxShadow: 'var(--img-shadow)', backgroundColor: 'var(--border)' }}>
-              <img src="https://images.unsplash.com/photo-1568886875985-ef8a500f8d17?w=800&h=600&fit=crop&auto=format" alt="Home-style dish" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+              <img src="https://images.unsplash.com/photo-1568886875985-ef8a500f8d17?w=800&h=600&fit=crop&auto=format" alt="Блюдо домашней кухни" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
             </div>
           </Fade>
         </div>
@@ -483,7 +483,7 @@ export default function App() {
       {/* ── Benefits ── */}
       <section style={{ background: 'var(--bg-alt)', padding: '96px 32px', transition: 'background 0.3s' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-          <SectionHeading overline="Why Dachnoye" title="Why people come back again and again" subtitle="Six honest reasons. No marketing speak." />
+          <SectionHeading overline="Почему «Дачное»" title="Почему сюда возвращаются снова и снова" subtitle="Шесть честных причин. Никаких маркетинговых уловок." />
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 20, marginTop: 52 }}>
             {BENEFITS.map((b, i) => (
               <Fade key={b.title} delay={i * 80}>
@@ -506,7 +506,7 @@ export default function App() {
       {/* ── Business Lunches ── */}
       <section id="menu" style={{ padding: '96px 32px', background: 'var(--bg)', transition: 'background 0.3s' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-          <SectionHeading overline="Daily menu" title="Lunches that keep you full all day" subtitle="Every day from 12:00 to 16:00. Or whenever you like — we're always ready." />
+          <SectionHeading overline="Меню дня" title="Обеды, которые насыщают на весь день" subtitle="Каждый день с 12:00 до 16:00. Или в любое другое время — мы всегда готовы." />
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 20, marginTop: 52 }}>
             {LUNCHES.map((l, i) => (
               <Fade key={l.num} delay={i * 90}>
@@ -519,7 +519,7 @@ export default function App() {
                       {l.badge}
                     </span>
                   )}
-                  <p style={{ fontSize: 11, fontWeight: 500, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--ink-3)', marginBottom: 8 }}>Lunch #{l.num}</p>
+                  <p style={{ fontSize: 11, fontWeight: 500, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--ink-3)', marginBottom: 8 }}>Обед №{l.num}</p>
                   <div style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 42, fontWeight: 700, color: '#C87A4F', lineHeight: 1, marginBottom: 20 }}>
                     {l.price} <span style={{ fontSize: 22 }}>₽</span>
                   </div>
@@ -543,7 +543,7 @@ export default function App() {
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 64, alignItems: 'center' }}>
             <div>
-              <SectionHeading overline="Street food" title="Shawarma for every taste" subtitle="In pita, with sauce, with crunch. From 190 ₽." center={false} />
+              <SectionHeading overline="Стритфуд" title="Шаурма на любой вкус" subtitle="В лаваше, с соусом, с хрустом. От 190 ₽." center={false} />
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginTop: 36 }}>
                 {SHAWARMAS.map((s, i) => (
                   <Fade key={s.name} delay={i * 55}>
@@ -556,7 +556,7 @@ export default function App() {
                         <div style={{ fontSize: 12, color: 'var(--ink-3)' }}>{s.desc}</div>
                       </div>
                       {s.badge && (
-                        <span style={{ background: s.badge === 'Spicy' || s.badge === 'Hot' ? '#C87A4F' : '#E8C87A', color: s.badge === 'Spicy' || s.badge === 'Hot' ? '#fff' : '#1A1A1A', borderRadius: 20, fontSize: 10, fontWeight: 600, padding: '3px 9px', letterSpacing: '0.04em', textTransform: 'uppercase', flexShrink: 0, marginLeft: 8 }}>
+                        <span style={{ background: s.badge === 'Острая' || s.badge === '🔥' ? '#C87A4F' : '#E8C87A', color: s.badge === 'Острая' || s.badge === '🔥' ? '#fff' : '#1A1A1A', borderRadius: 20, fontSize: 10, fontWeight: 600, padding: '3px 9px', letterSpacing: '0.04em', textTransform: 'uppercase', flexShrink: 0, marginLeft: 8 }}>
                           {s.badge}
                         </span>
                       )}
@@ -567,7 +567,7 @@ export default function App() {
             </div>
             <Fade delay={100}>
               <div style={{ borderRadius: 20, overflow: 'hidden', aspectRatio: '3/4', boxShadow: 'var(--img-shadow)', backgroundColor: 'var(--border)' }}>
-                <img src="https://images.unsplash.com/photo-1760888548893-bc2f7e09e972?w=600&h=800&fit=crop&auto=format" alt="Freshly wrapped shawarma" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                <img src="https://images.unsplash.com/photo-1760888548893-bc2f7e09e972?w=600&h=800&fit=crop&auto=format" alt="Свежая шаурма" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
               </div>
             </Fade>
           </div>
@@ -580,11 +580,11 @@ export default function App() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 64, alignItems: 'center' }}>
             <Fade delay={80}>
               <div style={{ borderRadius: 20, overflow: 'hidden', aspectRatio: '4/3', boxShadow: 'var(--img-shadow)', backgroundColor: 'var(--border)' }}>
-                <img src="https://images.unsplash.com/photo-1629385701021-fcd568a743e8?w=700&h=520&fit=crop&auto=format" alt="Ice cream scoops" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                <img src="https://images.unsplash.com/photo-1629385701021-fcd568a743e8?w=700&h=520&fit=crop&auto=format" alt="Шарики мороженого" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
               </div>
             </Fade>
             <div>
-              <SectionHeading overline="Dessert" title="Ice cream for every taste" subtitle="11 flavors. 100 ₽ per scoop." center={false} />
+              <SectionHeading overline="Десерт" title="Мороженое на любой вкус" subtitle="11 вкусов. 100 ₽ за шарик." center={false} />
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 9, marginTop: 32 }}>
                 {ICE_CREAMS.map((f, i) => (
                   <Fade key={f.name} delay={i * 40}>
@@ -597,7 +597,7 @@ export default function App() {
                   </Fade>
                 ))}
               </div>
-              <p style={{ fontSize: 13, color: 'var(--ink-3)', marginTop: 18 }}>Cones: 0.3L — 19 ₽ · 0.5L — 20 ₽</p>
+              <p style={{ fontSize: 13, color: 'var(--ink-3)', marginTop: 18 }}>Рожки: 0,3 л — 19 ₽ · 0,5 л — 20 ₽</p>
             </div>
           </div>
         </div>
@@ -606,7 +606,7 @@ export default function App() {
       {/* ── Gallery ── */}
       <section id="gallery" style={{ background: 'var(--bg-alt)', padding: '96px 32px', transition: 'background 0.3s' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-          <SectionHeading overline="Inside Dachnoye" title="It's tasty here" subtitle="Come in — or take a look first." />
+          <SectionHeading overline="Внутри «Дачного»" title="Здесь вкусно" subtitle="Заходите — или посмотрите сначала." />
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 14, marginTop: 52 }} className="md:grid-cols-3 sm:grid-cols-2 grid-cols-1">
             {GALLERY.map((img, i) => (
               <Fade key={img.src} delay={i * 65}>
@@ -625,7 +625,7 @@ export default function App() {
       {/* ── Reviews ── */}
       <section id="reviews" style={{ padding: '96px 32px', background: 'var(--bg)', transition: 'background 0.3s' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-          <SectionHeading overline="What people say" title={`"It's tasty here"`} subtitle="300+ reviews. These are a few of them." />
+          <SectionHeading overline="Что говорят люди" title="«Здесь вкусно»" subtitle="Более 300 отзывов. Вот некоторые из них." />
           <div style={{ maxWidth: 680, margin: '52px auto 0' }}>
             {REVIEWS.map((r, i) => (
               <div key={r.name} style={{ display: i === activeReview ? 'block' : 'none' }}>
@@ -657,16 +657,16 @@ export default function App() {
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 64, alignItems: 'start' }}>
             <Fade>
-              <p style={{ fontSize: 11, fontWeight: 500, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#C87A4F', marginBottom: 16 }}>Find us</p>
+              <p style={{ fontSize: 11, fontWeight: 500, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#C87A4F', marginBottom: 16 }}>Как нас найти</p>
               <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 'clamp(28px, 4vw, 42px)', fontWeight: 700, marginBottom: 36, color: 'var(--ink)', lineHeight: 1.2 }}>
-                How to find us
+                Контакты
               </h2>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
                 {[
-                  { icon: <IconPin size={20} color="#C87A4F" />, label: 'Address', value: 'Novatorov Boulevard, 83A, St. Petersburg' },
-                  { icon: <IconTrain size={20} color="#C87A4F" />, label: 'Metro', value: 'Prospekt Veteranov — 2-minute walk' },
-                  { icon: <IconClock size={20} color="#C87A4F" />, label: 'Hours', value: 'Open 24 hours, 7 days a week' },
-                  { icon: <IconCoin size={20} color="#C87A4F" />, label: 'Average check', value: 'from 500 ₽' },
+                  { icon: <IconPin size={20} color="#C87A4F" />, label: 'Адрес', value: 'Бульвар Новаторов, 83А, Санкт-Петербург' },
+                  { icon: <IconTrain size={20} color="#C87A4F" />, label: 'Метро', value: '«Проспект Ветеранов» — 2 минуты пешком' },
+                  { icon: <IconClock size={20} color="#C87A4F" />, label: 'Часы работы', value: 'Круглосуточно, 7 дней в неделю' },
+                  { icon: <IconCoin size={20} color="#C87A4F" />, label: 'Средний чек', value: 'от 500 ₽' },
                 ].map(({ icon, label, value }) => (
                   <div key={label} style={{ display: 'flex', gap: 14, alignItems: 'flex-start' }}>
                     <div style={{ width: 44, height: 44, borderRadius: 12, background: 'var(--terra-wash)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, transition: 'background 0.3s' }}>
@@ -687,7 +687,7 @@ export default function App() {
                 onMouseEnter={e => { const el = e.currentTarget as HTMLAnchorElement; el.style.background = '#B06A42'; el.style.transform = 'scale(1.02)' }}
                 onMouseLeave={e => { const el = e.currentTarget as HTMLAnchorElement; el.style.background = '#C87A4F'; el.style.transform = 'scale(1)' }}
               >
-                Show on Yandex Maps
+                Показать на Яндекс Картах
                 <IconArrow size={17} color="#fff" />
               </a>
             </Fade>
@@ -700,7 +700,7 @@ export default function App() {
                   width="100%"
                   height="100%"
                   style={{ border: 'none', display: 'block', width: '100%', height: '100%', minHeight: 300 }}
-                  title="Dachnoye on Yandex Maps"
+                  title="«Дачное» на Яндекс Картах"
                   allowFullScreen
                 />
               </div>
@@ -715,12 +715,12 @@ export default function App() {
         <div style={{ position: 'absolute', inset: 0, background: dark ? 'rgba(0,0,0,0.78)' : 'rgba(26,18,10,0.72)', transition: 'background 0.3s' }} />
         <Fade>
           <div style={{ position: 'relative' }}>
-            <p style={{ fontSize: 11, fontWeight: 500, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.65)', marginBottom: 14 }}>We&apos;re waiting</p>
+            <p style={{ fontSize: 11, fontWeight: 500, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.65)', marginBottom: 14 }}>Мы ждём вас</p>
             <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 'clamp(32px, 5vw, 58px)', fontWeight: 700, color: '#fff', marginBottom: 14, lineHeight: 1.15 }}>
-              Dachnoye is always open
+              «Дачное» всегда открыто
             </h2>
             <p style={{ fontSize: 17, color: 'rgba(255,255,255,0.8)', marginBottom: 38 }}>
-              Come by today. Or at 3 AM. We&apos;ll be here either way.
+              Заходите сегодня. Или в 3 часа ночи. Мы будем здесь.
             </p>
             <a
               href={YANDEX_MAPS_URL}
@@ -730,7 +730,7 @@ export default function App() {
               onMouseEnter={e => { const el = e.currentTarget as HTMLAnchorElement; el.style.background = '#B06A42'; el.style.transform = 'scale(1.03)' }}
               onMouseLeave={e => { const el = e.currentTarget as HTMLAnchorElement; el.style.background = '#C87A4F'; el.style.transform = 'scale(1)' }}
             >
-              Show on Yandex Maps
+              Показать на Яндекс Картах
               <IconArrow size={17} color="#fff" />
             </a>
           </div>
@@ -742,14 +742,14 @@ export default function App() {
         <div style={{ maxWidth: 1200, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 40 }}>
           <div>
             <div style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 21, fontWeight: 700, color: '#fff', marginBottom: 12, letterSpacing: '-0.01em' }}>DACHNOYE</div>
-            <p style={{ fontSize: 14, lineHeight: 1.65 }}>Urban bistro on Prospekt Veteranov.<br />Honest food, always open.</p>
+            <p style={{ fontSize: 14, lineHeight: 1.65 }}>Городской бистро на проспекте Ветеранов.<br />Честная еда, всегда открыто.</p>
           </div>
           <div>
-            <p style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.35)', marginBottom: 14 }}>Location</p>
-            <p style={{ fontSize: 14, lineHeight: 1.8 }}>Novatorov Boulevard, 83A<br />St. Petersburg, Russia<br /><span style={{ color: '#C87A4F' }}>Open 24/7</span></p>
+            <p style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.35)', marginBottom: 14 }}>Адрес</p>
+            <p style={{ fontSize: 14, lineHeight: 1.8 }}>Бульвар Новаторов, 83А<br />Санкт-Петербург, Россия<br /><span style={{ color: '#C87A4F' }}>Круглосуточно</span></p>
           </div>
           <div>
-            <p style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.35)', marginBottom: 14 }}>Navigation</p>
+            <p style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.35)', marginBottom: 14 }}>Навигация</p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
               {NAV_LINKS.map(l => (
                 <button key={l.href} onClick={() => scrollTo(l.href)}
@@ -764,8 +764,8 @@ export default function App() {
           </div>
         </div>
         <div style={{ maxWidth: 1200, margin: '36px auto 0', paddingTop: 22, borderTop: '1px solid rgba(255,255,255,0.07)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 10 }}>
-          <p style={{ fontSize: 13 }}>© Dachnoye, St. Petersburg</p>
-          <p style={{ fontSize: 13, color: '#C87A4F' }}>Always open. Always tasty.</p>
+          <p style={{ fontSize: 13 }}>© «Дачное», Санкт-Петербург</p>
+          <p style={{ fontSize: 13, color: '#C87A4F' }}>Всегда открыто. Всегда вкусно.</p>
         </div>
       </footer>
 
