@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --color-terra: #C87A4F;
+  --color-terra-dark: #B06A42;
+}
+
+/* ── Design tokens ─────────────────────────────── */
+:root {
+  --bg:             #FBF6F0;
+  --bg-alt:         #FFFFFF;
+  --surface:        #FFFFFF;
+  --surface-2:      #FBF6F0;
+  --ink:            #1A1A1A;
+  --ink-2:          #4A4A4A;
+  --ink-3:          #8A8A8A;
+  --border:         #E8E0D8;
+  --divider:        #F0EAE4;
+  --terra-wash:     #F5E1D3;
+  --nav-scrolled:   rgba(255,255,255,0.97);
+  --card-shadow:    0 4px 20px rgba(0,0,0,0.06);
+  --card-shadow-md: 0 12px 36px rgba(0,0,0,0.10);
+  --img-shadow:     0 20px 60px rgba(0,0,0,0.12);
+}
+
+[data-theme="dark"] {
+  --bg:             #1A1A1A;
+  --bg-alt:         #222222;
+  --surface:        #2A2A2A;
+  --surface-2:      #1A1A1A;
+  --ink:            #FFFFFF;
+  --ink-2:          #B0B0B0;
+  --ink-3:          #6A6A6A;
+  --border:         #3A3A3A;
+  --divider:        #2E2E2E;
+  --terra-wash:     rgba(200,122,79,0.18);
+  --nav-scrolled:   rgba(26,26,26,0.97);
+  --card-shadow:    0 4px 20px rgba(0,0,0,0.35);
+  --card-shadow-md: 0 12px 36px rgba(0,0,0,0.50);
+  --img-shadow:     0 20px 60px rgba(0,0,0,0.60);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--bg);
+  color: var(--ink);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #C87A4F; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
