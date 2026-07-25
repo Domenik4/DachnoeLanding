@@ -364,22 +364,11 @@ export default function App() {
           ))}
         </div>
 
-        <div className="hidden md:flex" style={{ alignItems: 'center', gap: 10 }}>
-          <ThemeToggle dark={dark} onToggle={toggleTheme} navScrolled={navScrolled} />
-          <button onClick={() => scrollTo('#contact')}
-            style={{ background: '#C87A4F', color: '#fff', border: 'none', borderRadius: 10, padding: '10px 20px', fontSize: 14, fontWeight: 500, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 7, transition: 'background 0.2s, transform 0.15s' }}
-            onMouseEnter={e => { e.currentTarget.style.background = '#B06A42'; e.currentTarget.style.transform = 'scale(1.02)' }}
-            onMouseLeave={e => { e.currentTarget.style.background = '#C87A4F'; e.currentTarget.style.transform = 'scale(1)' }}
-          >
-            <IconPin size={15} color="#fff" />
-            Как добраться
-          </button>
-        </div>
 
         <div className="md:hidden" style={{ marginLeft: 'auto', display: 'flex', gap: 10, alignItems: 'center' }}>
           <ThemeToggle dark={dark} onToggle={toggleTheme} navScrolled={navScrolled} />
           <button onClick={() => setMobileOpen(p => !p)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: navScrolled ? 'var(--ink)' : '#fff' }}>
-            {mobileOpen ? <IconX size={24} /> : <IconMenu size={24} />}
+            {mobileOpen ? <IconX size={24} /> : null}
           </button>
         </div>
       </nav>
