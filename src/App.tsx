@@ -52,11 +52,11 @@ const ICE_CREAMS = [
 ]
 
 const GALLERY = [
-  { src: 'https://images.unsplash.com/photo-1712730642507-d4ad0904e997?w=800&h=600&fit=crop&auto=format', alt: 'Тёплый зал' },
-  { src: 'https://images.unsplash.com/photo-1583354608715-177553a4035e?w=600&h=800&fit=crop&auto=format', alt: 'Столик на двоих' },
-  { src: 'https://images.unsplash.com/photo-1568886875985-ef8a500f8d17?w=800&h=600&fit=crop&auto=format', alt: 'Домашний суп' },
-  { src: 'https://images.unsplash.com/photo-1544031064-9de80864ade5?w=600&h=800&fit=crop&auto=format', alt: 'Просторный зал' },
-  { src: 'https://images.unsplash.com/photo-1760888548893-bc2f7e09e972?w=800&h=600&fit=crop&auto=format', alt: 'Свежая шаурма' },
+  { src: '/photoDachoye/cafe.png', alt: 'Тёплый зал' },
+  { src: '/photoDachoye/Pete.png', alt: 'Столик на двоих' },
+  { src: '/photoDachoye/hall.png', alt: 'Домашний суп' },
+  { src: '/photoDachoye/terrace.png', alt: 'Просторный зал' },
+  { src: '/photoDachoye/shawarma.png', alt: 'Свежая шаурма' },
   { src: 'https://images.unsplash.com/photo-1629385701021-fcd568a743e8?w=800&h=600&fit=crop&auto=format', alt: 'Шарики мороженого' },
 ]
 
@@ -404,7 +404,7 @@ export default function App() {
 
       {/* ── Hero ── */}
       <section style={{ position: 'relative', height: '100vh', minHeight: 600, overflow: 'hidden', display: 'flex', alignItems: 'flex-end' }}>
-        <div ref={heroImgRef} style={{ position: 'absolute', inset: '-5%', backgroundImage: "url('https://images.unsplash.com/photo-1712730642507-d4ad0904e997?w=1920&h=1080&fit=crop&auto=format')", backgroundSize: 'cover', backgroundPosition: 'center', transform: 'scale(1.05)', transition: 'transform 0.1s linear' }} />
+        <div ref={heroImgRef} style={{ position: 'absolute', inset: '-5%', backgroundImage: "url('/photoDachoye/cafe.png')", backgroundSize: 'cover', backgroundPosition: 'center', transform: 'scale(1.05)', transition: 'transform 0.1s linear' }} />
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(10,8,6,0.82) 0%, rgba(10,8,6,0.38) 55%, rgba(10,8,6,0.18) 100%)' }} />
         <div style={{ position: 'relative', width: '100%', maxWidth: 1200, margin: '0 auto', padding: '0 32px 80px' }}>
           <div style={{ opacity: heroReady ? 1 : 0, transform: heroReady ? 'none' : 'translateY(16px)', transition: 'opacity 0.8s, transform 0.8s' }}>
@@ -474,7 +474,7 @@ export default function App() {
           </Fade>
           <Fade delay={150}>
             <div style={{ borderRadius: 20, overflow: 'hidden', aspectRatio: '4/3', boxShadow: 'var(--img-shadow)', backgroundColor: 'var(--border)' }}>
-              <img src="https://images.unsplash.com/photo-1568886875985-ef8a500f8d17?w=800&h=600&fit=crop&auto=format" alt="Блюдо домашней кухни" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+              <img src="/photoDachoye/Pete.png" alt="Блюдо домашней кухни" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
             </div>
           </Fade>
         </div>
@@ -567,7 +567,7 @@ export default function App() {
             </div>
             <Fade delay={100}>
               <div style={{ borderRadius: 20, overflow: 'hidden', aspectRatio: '3/4', boxShadow: 'var(--img-shadow)', backgroundColor: 'var(--border)' }}>
-                <img src="https://images.unsplash.com/photo-1760888548893-bc2f7e09e972?w=600&h=800&fit=crop&auto=format" alt="Свежая шаурма" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                <img src="/photoDachoye/shawarma.png" alt="Свежая шаурма" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
               </div>
             </Fade>
           </div>
